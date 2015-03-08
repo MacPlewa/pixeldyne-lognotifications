@@ -4,20 +4,29 @@
     <title>$title$</title>
 	<style>
 	body { font-family: "Segoe UI", Tahoma, Arial, Helvetica, sans-serif; }
-	table { border: 1px solid #444; }
+	table { border: none; }
 	td { vertical-align: top; }
+	.Warning { color: DarkRed; }
+	.Error, .FailureAudit { color: Red; }
 	</style>
 </head>
 <body>
+
+	<!-- available attributes:
+	
+	EntryType
+	TimeGenerated
+	Source
+	
+	-->
 	<table>
 		$messages:{
 		<tr>
-			<td>$it.EntryType$</td>
+			<td valign="top"><span class="$it.EntryType$">$it.EntryType$</span></td>
 			<td>$it.TimeGenerated$</td>
 		</tr>
 		<tr>
-			<td>Message</td>
-			<td>$it.Message$</td>
+			<td colspan="2">$it.Message$</td>
 		</tr>
 		}$
 	</table>

@@ -9,7 +9,7 @@ I've tried to keep it as simple as possible, with a focus on extensibility and c
 
 That means you have full control over how the emails look and how much information is included, and by modifying the easy to use script you can also get events from other sources such as Security, DNS, etc.
 
-The script was developed and tested with PowerShell version 4, it might or not work with earlier versions. Tested on Windows 7 and 8.
+The script was developed and tested with PowerShell version 4, it might or not work with earlier versions. Tested on Windows 7 and 8. If you run into any issues with permissions, please read https://technet.microsoft.com/library/hh847748.aspx.
 
 Setup and Configuration
 =======================
@@ -18,8 +18,9 @@ Uncompress the zip file from github to a folder on your disk, e.g. "C:\Tools\" (
 
 Open LogNotify.ps1 in your favourite editor and look at the $configuration. You need to configure your email address and provider details first. If you use GMail, Hotmail/Outlook - examples are provided in the file. For other servers, just find the SMTP server details and optionally configure these parameters:
 
-- EventTypes: comma separated, available: Information,Warning,Error (defaults to Warning)
-- TimePeriod: time in hours, e.g. 24 to get messages for the past 24 hours - should be the same as the period your scheduled task runs at
+- EventTypes:	comma separated, available: Error,Warning,Information,FailureAudit,SuccessAudit
+- EventLogs:	comma separated, available: Application,System,Security
+- TimePeriod:	time in hours, e.g. 24 to get messages for the past 24 hours - should be the same as the period your scheduled task runs at
 
 Setup your scheduled task:
 
@@ -38,7 +39,7 @@ Usage (Command line)
 
 powershell -file LogNotify.ps1
 
-If your security policy prevents running scripts:
+If your security policy prevents running scripts (see https://technet.microsoft.com/library/hh847748.aspx):
 
 powershell -file LogNotify.ps1 -ExecutionPolicy Bypass
 
@@ -52,9 +53,13 @@ Licence
 
 Since it derives a lot of its functionality from StringTemplate (http://www.stringtemplate.org/) I'm releasing it under the same BSD license so that you're free to use and modify it any way you wish.
 
+--
+
 pixeldyne-lognotifications is Copyright (c) 2014-2015 Maciek 'Mac' Plewa (mac.plewa@pixeldyne.systems)
 
-[The BSD License]
+--
+
+StringTemplate: The BSD License
 
 Copyright (c) 2012 Terence Parr
 All rights reserved.
